@@ -1,0 +1,61 @@
+{% extends './blocks/topbottom.html' %}
+
+{% block topbottom %}
+
+<section style="padding-top: 5%;">
+    <div class="d-flex flex-column justify-content-center" id="login-box">
+        <div class="login-box-header">
+            <h4 style="color:rgb(139,139,139);margin-bottom:0px;font-weight:400;font-size:27px;">Register</h4>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' or message.tags == 'warning'  %}
+                <div class="alert alert-warning m-4" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="email-login" style="background-color:#ffffff;">
+
+                <div>
+                    <label for="profile_pic" class="form-label">Add profile image</label>
+                    <div>
+                        <input  id="profile_pic" class="mb-3" type="file"
+                            accept="image/*" name="profile_pic" />
+                    </div>
+                </div>
+
+                <input name="first_name" type="text" class="text-imput form-control" style="margin-top:10px;" required
+                    placeholder="First name" minlength="4">
+
+                <input name="last_name" type="text" class="text-imput form-control" style="margin-top:10px;" required
+                    placeholder="Last name" minlength="4">
+
+                <input name="username" type="text" class="text-imput form-control" style="margin-top:10px;" required
+                    placeholder="Username" minlength="6">
+
+                <input name="email" type="email" class="email-imput form-control" style="margin-top:10px;" required
+                    placeholder="Email" >
+
+                <input name="password" type="password" class="password-input form-control" style="margin-top:10px;"
+                    required placeholder="Password" minlength="6">
+                
+            </div>
+            <div class="submit-row" style="margin-bottom:8px;padding-top:0px;">
+                <button class="btn btn-primary d-block box-shadow w-100" id="submit-id-submit" type="submit"
+                    style="background: var(--bs-indigo);">
+                    Register
+                </button>
+            </div>
+        </form>
+        <div id="login-box-footer" style="padding:10px 20px;padding-bottom:23px;padding-top:18px;">
+            <p style="margin-bottom:0px;">Already have an account?<a id="register-link" href="/">Login!</a></p>
+        </div>
+    </div>
+</section>
+</header>
+{% endblock %}

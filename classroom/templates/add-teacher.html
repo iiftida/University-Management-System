@@ -1,0 +1,95 @@
+{% extends './blocks/user.html' %}
+
+{% block user %}
+
+<section style="padding-top: 5%;">
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div id="login-box" class="d-flex flex-column justify-content-center">
+            <div class="login-box-header">
+                <h4 style="color: rgb(139,139,139);margin-bottom: 0px;font-weight: 400;font-size: 27px;">
+                   Add Faculty
+                </h4>
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' or message.tags == 'warning'  %}
+            <div class="alert alert-warning m-4" role="alert">
+                {{ message }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <div class="email-login" style="background-color: #ffffff;">
+                <div>
+                    <label for="profile_pic" class="form-label">Choose profile picture</label>
+                    <div>
+                        <input  id="profile_pic" class="mb-3" type="file"
+                            accept="image/*" name="profile_pic" />
+                    </div>
+                </div>
+
+                <input  id="first_name" class="form-control" type="text" name="first_name"
+                    placeholder="First Name" required="true" style="margin-bottom: 1rem;" />
+
+                <input  id="lasr_name" class="form-control" type="text" name="last_name"
+                    placeholder="Last Name" required="true" style="margin-bottom: 1rem;" />
+
+                <input required id="user_name" class="form-control" type="text" name="username"
+                    placeholder="Username"   />
+
+                <input class="email-imput form-control" type="email" style="margin-top: 10px;"
+                    required placeholder="Email" minlength="6"  name="email"  />
+
+                <input required class="form-control" type="password" style="margin-top: 10px;" placeholder="Password"
+                    minlength="6" name="password" />
+
+                    <div class="my-3">
+                        <label for="gender" class="form-label">Select gender</label>
+                        <select required value='male' id="gender" class="form-select" name="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </div>
+                
+                    <input  id="short_code" class="form-control" type="text" name="short_code"
+                    placeholder="Short Code" required="true" style="margin-bottom: 1rem;" />
+
+                    
+                    <input  id="qualifications" class="form-control" type="text" name="qualifications"
+                    placeholder="Qualifications" required="true" style="margin-bottom: 1rem;" />
+                    
+                    <input  id="designations" class="form-control" type="text" name="designations"
+                    placeholder="Designations" required="true" style="margin-bottom: 1rem;" />
+                    
+                    <textarea id="address" required class="form-control my-3" name="address" placeholder="Address"></textarea>
+
+            
+                    <input  id="phone" class="form-control" type="text" name="phone"
+                    placeholder="Phone number" required  style="margin-bottom: 1rem;" />
+
+                    <div class="my-3">
+                        <label for="department" class="form-label">Select Department</label>
+                        <select required id="department" class="form-select" name="department">
+                            {% for department in departments %}
+                            <option value="{{department.id}}">{{department.department_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+            </div>
+            <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;">
+
+                <button id="submit-id-submit" class="btn btn-primary d-block box-shadow w-100" type="submit"
+                    style="background: var(--bs-indigo);">Submit</button>
+            </div>
+            <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;"></div>
+        </div>
+    </form>
+</section>
+
+
+
+
+{% endblock %}

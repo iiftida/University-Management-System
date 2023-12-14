@@ -1,0 +1,70 @@
+{% extends './blocks/user.html' %}
+
+{% block user %}
+
+<section style="padding-top: 5%;">
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div id="login-box" class="d-flex flex-column justify-content-center">
+            <div class="login-box-header">
+                <h4 style="color: rgb(139,139,139);margin-bottom: 0px;font-weight: 400;font-size: 27px;">
+                   Submit Assignment
+                </h4>
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' or message.tags == 'warning'  %}
+            <div class="alert alert-warning m-4" role="alert">
+                {{ message }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            
+            <div class="email-login" style="background-color: #ffffff;">
+                <input  disabled  value="{{assignment.assignment_title}}" id="assignment_title" class="form-control mb-3" type="text" name="assignment_title"
+                placeholder="Assignment title"  style="margin-bottom: 1rem;" />
+                
+                <textarea disabled value="{{assignment.assignment_description}}" id="assignment_description"  class="form-control my-3" name="assignment_description" placeholder="Description">{{assignment.assignment_description}}</textarea>
+                
+                <div>
+                    <label for="assignment_submission_date" class="form-label">Subission date</label>
+                    <input disabled value="{{assignment.assignment_submission_date}}"  id="assignment_submission_date" class="form-control mb-3" type="text" name="assignment_submission_date"
+                      style="margin-bottom: 1rem;" />
+                </div>
+                {% if assignment.assignment_image %}
+                <div><a href="/media/{{assignment.assignment_image}}"><img style='height:60px;width:100px;' src="/media/{{assignment.assignment_image}}" alt="{{assignment.assignment_title}}" ></a></div>
+                {% else %}
+                <td>No Image</td>
+                {% endif %}
+                {% if assignment.assignment_file %}
+                <div class="my-3"><a href="/media/{{assignment.assignment_file}}"><img style='height:60px;width:100px;' src="/media/{{assignment.assignment_file}}" alt="{{assignment.assignment_title}}" ></a></div>
+                {% else %}
+                <td>No File</td>
+                {% endif %}
+
+
+                <div>
+                    <label for="submission_file" class="form-label">Add attachments</label>
+                    <div>
+                        <input required  id="submission_file" class="mb-3" type="file"
+                            accept="*" name="submission_file" />
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;">
+
+                <button id="submit-id-submit" class="btn btn-primary d-block box-shadow w-100" type="submit"
+                    style="background: var(--bs-indigo);">Submit</button>
+            </div>
+            <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;"></div>
+        </div>
+    </form>
+</section>
+
+
+
+
+{% endblock %}

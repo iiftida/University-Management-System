@@ -1,0 +1,7 @@
+{
+    "prettier.enable": false,
+    "prettier.singleQuote": true,
+    "files.associations": {
+        "*.html": "django-html"
+    }
+}
